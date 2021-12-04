@@ -32,8 +32,10 @@ bool readData(const std::string& fileName, std::vector<int>& data) {
 int main()
 {
     std::vector<int> data;
-    if (!readData("data.txt", data))
+    if (!readData("../data.txt", data)) {
+        std::cout << "No data!" << std::endl;
         return 5;
+    }
 
     // Part 1
     unsigned countIncreases = 0;
