@@ -1,7 +1,14 @@
+#ifdef NDEBUG
+#  define assert(condition) ((void)0)
+#else
+#  define assert(condition) /*implementation defined*/
+#endif
+
 #include <bitset>
 #include <fstream>
 #include <functional>
 #include <iostream>
+#include <string>
 #include <vector>
 
 const int sizeOfRow = 12;
@@ -39,7 +46,7 @@ int main(){
 
     // Part 1
     std::vector<std::bitset<12>> gammaBits;
-    if(!readData("../../Day3/data.txt", gammaBits)) {
+    if(!readData("../data/day3.txt", gammaBits)) {
         return 5;
     }
 

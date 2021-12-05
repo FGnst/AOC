@@ -1,5 +1,8 @@
-// SonarSweep.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
+#ifdef NDEBUG
+#  define assert(condition) ((void)0)
+#else
+#  define assert(condition) /*implementation defined*/
+#endif
 
 #include <algorithm>
 #include <fstream>
@@ -32,7 +35,7 @@ bool readData(const std::string& fileName, std::vector<int>& data) {
 int main()
 {
     std::vector<int> data;
-    if (!readData("../data.txt", data)) {
+    if (!readData("../data/day1.txt", data)) {
         std::cout << "No data!" << std::endl;
         return 5;
     }

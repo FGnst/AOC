@@ -5,7 +5,16 @@ set (CMAKE_CXX_STANDARD 17)
 # set the project name
 project(AdventOfCode)
 
-# add the executable
-add_subdirectory(Day1)
-add_subdirectory(Day2)
-add_subdirectory(Day3)
+add_executable(Day1_SonarSweep src/Day1_SonarSweep.cpp)
+add_executable(Day2_Dive src/Day2_Dive.cpp)
+add_executable(Day3_BinaryDiagnostic src/Day3_BinaryDiagnostic.cpp)
+
+message(STATUS ${CMAKE_CURRENT_SOURCE_DIR})
+message(STATUS ${CMAKE_CURRENT_BINARY_DIR})
+
+add_custom_target(data ALL)
+add_custom_command(TARGET data POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    ${CMAKE_CURRENT_SOURCE_DIR}/data
+    ${CMAKE_CURRENT_BINARY_DIR}/data
+    COMMENT "Copying 'data'")

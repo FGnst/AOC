@@ -1,3 +1,9 @@
+#ifdef NDEBUG
+#  define assert(condition) ((void)0)
+#else
+#  define assert(condition) /*implementation defined*/
+#endif
+
 #include <fstream>
 #include <iosfwd>
 #include <iostream>
@@ -45,7 +51,7 @@ bool readData(const std::string& fileName, std::vector<std::pair<Instructions, u
 
 int main(){
     std::vector<std::pair<Instructions, unsigned>> data{};
-    if(!readData("../../Day2/data.txt", data)) {
+    if(!readData("../data/day2.txt", data)) {
         std::cout << "Failed to read data" << std::endl;
         return 5;
     }
