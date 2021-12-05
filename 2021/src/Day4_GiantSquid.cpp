@@ -42,6 +42,9 @@ public:
     }
 
     bool markNumber(unsigned numberToMark){
+        if(_hasWon)
+            return false;
+
         auto copiedData = _data;
         auto it = std::partition(copiedData.begin(), copiedData.end(), [&numberToMark](const auto & d){return d == numberToMark;});
         if (it == copiedData.end())
@@ -64,7 +67,10 @@ public:
         return std::accumulate(markedNums.begin(), markedNums.end(), 0);
     }
 
-    bool hasWon() const {
+    bool hasWon() {
+        if(_hasWon)
+            return  true;
+
         // loop columns
         for (unsigned i = 0; i < _rows; ++i) {
             unsigned countMarkedColumn = 0;
@@ -72,8 +78,10 @@ public:
                 if(isMarked(getData(i,j)))
                     countMarkedColumn++;
             }
-            if(countMarkedColumn == _rows)
+            if(countMarkedColumn == _rows) {
+                _hasWon = true;
                 return true;
+            }
         }
 
         // loop rows
@@ -83,8 +91,10 @@ public:
                 if(isMarked(getData(i, j)))
                     countMarkedRow++;
             }
-            if(countMarkedRow == _cols)
+            if(countMarkedRow == _cols) {
+                _hasWon = true;
                 return true;
+            }
         }
 
         return false;
@@ -105,6 +115,7 @@ private:
     unsigned _rows;
     unsigned _cols;
     std::vector<unsigned> _markedNumbers; // stores true at marked Positions, false otherwise
+    bool _hasWon;
 };
 
 bool readData(const std::string& fileName, std::vector<Board>& boards) {
@@ -146,6 +157,9 @@ bool readData(const std::string& fileName, std::vector<Board>& boards) {
 
 std::optional<unsigned> getWinningBoard(std::vector<Board>& boards, unsigned num) {
     for (auto boardIt = boards.begin(); boardIt != boards.end(); ++boardIt) {
+        if(boardIt->hasWon())
+            continue;
+
         boardIt->markNumber(num);
         if (boardIt->hasWon()) {
             auto sumUnmarked = boardIt->getSumUnmarked();
@@ -155,7 +169,22 @@ std::optional<unsigned> getWinningBoard(std::vector<Board>& boards, unsigned num
     return std::nullopt;
 }
 
-void doTest(){
+void updateWinningBoards(std::vector<Board>& boards, std::vector<unsigned>& winningBoardsIndices,std::vector<unsigned>& winningNums, unsigned num) {
+    for (auto boardIt = boards.begin(); boardIt != boards.end(); ++boardIt) {
+        if(boardIt->hasWon())
+            continue;
+
+        boardIt->markNumber(num);
+    }
+    for (auto boardIt = boards.begin(); boardIt != boards.end(); ++boardIt) {
+        if (boardIt->hasWon() && std::find(winningBoardsIndices.begin(), winningBoardsIndices.end(), std::distance(boards.begin(), boardIt)) == winningBoardsIndices.end()) {
+            winningBoardsIndices.push_back(std::distance(boards.begin(), boardIt));
+            winningNums.push_back(num);
+        }
+    }
+}
+
+void doTestPart1(){
     std::vector<unsigned> numbers{7,4,9,5,11,17,23,2,0,14,21,24,10,16,13,6,15,25,12,22,18,20,8,19,3,26,1};
     std::vector<Board> boards;
     assert(readData("../data/day4_testdata.txt", boards));
@@ -175,9 +204,26 @@ void doTest(){
     }
 }
 
+void doTestPart2(){
+    std::vector<unsigned> numbers{7,4,9,5,11,17,23,2,0,14,21,24,10,16,13,6,15,25,12,22,18,20,8,19,3,26,1};
+    std::vector<Board> boards;
+    assert(readData("../data/day4_testdata.txt", boards));
+    assert(boards.size() == 3);
+    assert(boards[0].getData(0,0) == 22 && boards[1].getData(0,0) == 3 && boards[2].getData(0,0) == 14);
+
+    std::vector<unsigned> winningBoardsIndices;
+    std::vector<unsigned> winningNums;
+    for(const auto& num : numbers) {
+        updateWinningBoards(boards, winningBoardsIndices,winningNums, num);
+    }
+
+    auto sumUnmarked = boards[winningBoardsIndices.back()].getSumUnmarked();
+    assert(sumUnmarked*(winningNums.back()) == 1924);
+}
+
 int main(){
     // Part 1
-    // doTest();
+    // doTestPart1();
     std::vector<unsigned> extractedNums{46,79,77,45,57,34,44,13,32,88,86,82,91,97,89,1,48,31,18,10,55,74,24,11,80,78,28,37,47,17,21,61,26,85,99,96,23,70,3,54,5,41,50,63,14,64,42,36,95,52,76,68,29,9,98,35,84,83,71,49,73,58,56,66,92,30,51,20,81,69,65,15,6,16,39,43,67,7,59,40,60,4,90,72,22,0,93,94,38,53,87,27,12,2,25,19,8,62,33,75};
     std::vector<Board> boards;
     if(!readData("../data/day4.txt", boards))
@@ -192,6 +238,21 @@ int main(){
             break;
         }
     }
+
+    // Part 2
+    doTestPart2();
+    std::optional<std::pair<Board, unsigned>> lastWinningBoardNum{std::nullopt};
+    std::vector<unsigned> winningBoardsIndices;
+    std::vector<unsigned> winningNums;
+    for(const auto& num : extractedNums) {
+        updateWinningBoards(boards, winningBoardsIndices,winningNums, num);
+    }
+
+    auto sumUnmarked = boards[winningBoardsIndices.back()].getSumUnmarked();
+
+    std::cout << "Last Winning board is: " << winningBoardsIndices.back() << std::endl;
+    std:: cout << "Score: " << winningNums.back()*sumUnmarked << std::endl;
+
     return 0;
 }
 
