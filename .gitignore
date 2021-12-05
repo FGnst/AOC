@@ -386,6 +386,4 @@ FodyWeavers.xsd
 # JetBrains Rider
 .idea/
 *.sln.iml
-2021/Day1/SonarSweep/SonarSweep.sln
-2021/Day1/SonarSweep/SonarSweep/SonarSweep.vcxproj
-2021/Day1/SonarSweep/SonarSweep/SonarSweep.vcxproj.filters
+2021/cmake/*
