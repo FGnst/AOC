@@ -4,6 +4,7 @@
 #  define assert(condition) /*implementation defined*/
 #endif
 
+#include <algorithm>
 #include <bitset>
 #include <fstream>
 #include <functional>
@@ -45,7 +46,7 @@ void filterByBit(std::vector<std::bitset<12>>& values, unsigned bitPos, const st
         return;
     auto it = std::partition(values.begin(), values.end(), [&bitPos](auto n) { return n[bitPos] == 1; });
     assert(it != values.end());
-    auto sizeOnes = std::distance(values.begin(), it);
+    unsigned long long sizeOnes = std::distance(values.begin(), it);
     auto sizeZeros = values.size() - sizeOnes;
     if (type == "OX"){
         if(sizeOnes >= sizeZeros)
@@ -66,7 +67,7 @@ void filterByBit(std::vector<std::bitset<5>>& values, unsigned bitPos, const std
         return;
     auto it = std::partition(values.begin(), values.end(), [&bitPos](auto n) { return n[bitPos] == 1; });
     assert(it != values.end());
-    auto sizeOnes = std::distance(values.begin(), it);
+    unsigned long long sizeOnes = std::distance(values.begin(), it);
     auto sizeZeros = values.size() - sizeOnes;
     if (type == "OX"){
         if(sizeOnes >= sizeZeros)
@@ -83,12 +84,12 @@ void filterByBit(std::vector<std::bitset<5>>& values, unsigned bitPos, const std
 }
 
 std::pair<int, int> extractGeneratorRating(const std::vector<std::bitset<5>>& data){
-    std::vector<std::uint16_t> bits;
-    for(int i = data[0].size() - 1; i >= 0; --i)
-        bits.push_back(i);
+    std::vector<unsigned> bits;
+    for(int i = int(data[0].size()) - 1; i >= 0; --i)
+        bits.push_back(unsigned(i));
 
-    auto oxygen = data;
-    auto co2 = data;
+    auto oxygen(data);
+    auto co2(data);
     for (auto bit : bits){
         filterByBit(oxygen, bit, "OX");
     }
@@ -101,9 +102,9 @@ std::pair<int, int> extractGeneratorRating(const std::vector<std::bitset<5>>& da
 
 
 std::pair<int, int> extractGeneratorRating(const std::vector<std::bitset<12>>& data){
-    std::vector<std::uint16_t> bits;
-    for(int i = data[0].size() - 1; i >= 0; --i)
-        bits.push_back(i);
+    std::vector<unsigned> bits;
+    for(int i = int(data[0].size() - 1); i >= 0; --i)
+        bits.push_back(unsigned(i));
 
     auto oxygen = data;
     auto co2 = data;

@@ -16,7 +16,6 @@
 
 class Board{
 public:
-    Board() = default;
     Board(unsigned rows, unsigned cols)
     : _data{}
     , _rows{rows}
@@ -27,7 +26,7 @@ public:
     };
 
     void init(unsigned initValue) {
-        for (auto i = 0; i < _rows * _cols; ++i) {
+        for (unsigned i = 0; i < _rows * _cols; ++i) {
             _data.push_back(initValue);
         }
     }
@@ -163,7 +162,7 @@ std::optional<unsigned> getWinningBoard(std::vector<Board>& boards, unsigned num
         boardIt->markNumber(num);
         if (boardIt->hasWon()) {
             auto sumUnmarked = boardIt->getSumUnmarked();
-            return std::distance(boards.begin(), boardIt);
+            return (unsigned)std::distance(boards.begin(), boardIt);
         }
     }
     return std::nullopt;
@@ -178,7 +177,7 @@ void updateWinningBoards(std::vector<Board>& boards, std::vector<unsigned>& winn
     }
     for (auto boardIt = boards.begin(); boardIt != boards.end(); ++boardIt) {
         if (boardIt->hasWon() && std::find(winningBoardsIndices.begin(), winningBoardsIndices.end(), std::distance(boards.begin(), boardIt)) == winningBoardsIndices.end()) {
-            winningBoardsIndices.push_back(std::distance(boards.begin(), boardIt));
+            winningBoardsIndices.push_back((unsigned)std::distance(boards.begin(), boardIt));
             winningNums.push_back(num);
         }
     }
@@ -255,6 +254,3 @@ int main(){
 
     return 0;
 }
-
-
-
