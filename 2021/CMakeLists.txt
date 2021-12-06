@@ -9,6 +9,7 @@ add_executable(Day1_SonarSweep src/Day1_SonarSweep.cpp)
 add_executable(Day2_Dive src/Day2_Dive.cpp)
 add_executable(Day3_BinaryDiagnostic src/Day3_BinaryDiagnostic.cpp)
 add_executable(Day4_GiantSquid src/Day4_GiantSquid.cpp)
+add_executable(Day5_HydrothermalVenture src/Day5_HydrothermalVenture.cpp)
 
 message(STATUS ${CMAKE_CURRENT_SOURCE_DIR})
 message(STATUS ${CMAKE_CURRENT_BINARY_DIR})
