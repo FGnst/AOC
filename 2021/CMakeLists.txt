@@ -5,13 +5,16 @@ set (CMAKE_CXX_STANDARD 17)
 # set the project name
 project(AdventOfCode)
 
-add_executable(Day1_SonarSweep src/Day1_SonarSweep.cpp)
-add_executable(Day2_Dive src/Day2_Dive.cpp)
-add_executable(Day3_BinaryDiagnostic src/Day3_BinaryDiagnostic.cpp)
-add_executable(Day4_GiantSquid src/Day4_GiantSquid.cpp)
-add_executable(Day5_HydrothermalVenture src/Day5_HydrothermalVenture.cpp)
-add_executable(Day6_LanternFish src/Day6_LanternFish.cpp)
-add_executable(Day7_TheTreacheryOfWales src/Day7_TheTreacheryOfWales.cpp)
+add_executable(Day01_SonarSweep src/Day01_SonarSweep.cpp)
+add_executable(Day02_Dive src/Day02_Dive.cpp)
+add_executable(Day03_BinaryDiagnostic src/Day03_BinaryDiagnostic.cpp)
+add_executable(Day04_GiantSquid src/Day04_GiantSquid.cpp)
+add_executable(Day05_HydrothermalVenture src/Day05_HydrothermalVenture.cpp)
+add_executable(Day06_LanternFish src/Day06_LanternFish.cpp)
+add_executable(Day07_TheTreacheryOfWales src/Day07_TheTreacheryOfWales.cpp)
+add_executable(Day08_SevenSegmentSearch src/Day08_SevenSegmentSearch.cpp)
+add_executable(Day09_SmokeBasin src/Day09_SmokeBasin.cpp)
+add_executable(Day10_SyntaxScoring src/Day10_SyntaxScoring.cpp)
 
 # copy data to cmake dir
 add_custom_target(data ALL)
