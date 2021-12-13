@@ -15,6 +15,9 @@ add_executable(Day07_TheTreacheryOfWales src/Day07_TheTreacheryOfWales.cpp)
 add_executable(Day08_SevenSegmentSearch src/Day08_SevenSegmentSearch.cpp)
 add_executable(Day09_SmokeBasin src/Day09_SmokeBasin.cpp)
 add_executable(Day10_SyntaxScoring src/Day10_SyntaxScoring.cpp)
+add_executable(Day11_DumboOctopus src/Day11_DumboOctopus.cpp)
+add_executable(Day12_PassagePathing src/Day12_PassagePathing.cpp)
+add_executable(Day13_TransparentOrigami src/Day13_TransparentOrigami.cpp)
 
 # copy data to cmake dir
 add_custom_target(data ALL)
