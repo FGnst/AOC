@@ -5,6 +5,8 @@ set (CMAKE_CXX_STANDARD 17)
 # set the project name
 project(AdventOfCode)
 
+include_directories(include/)
+
 add_executable(Day01_SonarSweep src/Day01_SonarSweep.cpp)
 add_executable(Day02_Dive src/Day02_Dive.cpp)
 add_executable(Day03_BinaryDiagnostic src/Day03_BinaryDiagnostic.cpp)
@@ -20,6 +22,7 @@ add_executable(Day12_PassagePathing src/Day12_PassagePathing.cpp)
 add_executable(Day13_TransparentOrigami src/Day13_TransparentOrigami.cpp)
 add_executable(Day14_ExtendedPolymerization src/Day14_ExtendedPolymerization.cpp)
 add_executable(Day15_Chiton src/Day15_Chiton.cpp)
+add_executable(Day16_PacketDecoder src/Day16_PacketDecoder.cpp)
 
 # copy data to cmake dir
 add_custom_target(data ALL)
