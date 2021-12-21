@@ -19,6 +19,7 @@ add_executable(Day11_DumboOctopus src/Day11_DumboOctopus.cpp)
 add_executable(Day12_PassagePathing src/Day12_PassagePathing.cpp)
 add_executable(Day13_TransparentOrigami src/Day13_TransparentOrigami.cpp)
 add_executable(Day14_ExtendedPolymerization src/Day14_ExtendedPolymerization.cpp)
+add_executable(Day15_Chiton src/Day15_Chiton.cpp)
 
 # copy data to cmake dir
 add_custom_target(data ALL)
