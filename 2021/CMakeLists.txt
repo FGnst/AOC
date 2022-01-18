@@ -25,6 +25,7 @@ add_executable(Day15_Chiton src/Day15_Chiton.cpp)
 add_executable(Day16_PacketDecoder src/Day16_PacketDecoder.cpp ${INCLUDE_DIR}/Day16_PacketDecoder.h)
 add_executable(Day17_TrickShot src/Day17_TrickShot.cpp)
 add_executable(Day18_SnailFish src/Day18_SnailFish.cpp)
+add_executable(Day19_BeaconScanner src/Day19_BeaconScanner.cpp)
 add_executable(Day20_TrenchMap src/Day20_TrenchMap.cpp)
 
 # copy data to cmake dir
